@@ -6,7 +6,7 @@
 - google-cloud-bigquery
 - colorama
 
-## Dev. dependencies
+## Dev. dependencies
 - autopep8
 - flake8
 - ruff
