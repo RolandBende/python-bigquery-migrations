@@ -1,3 +1,15 @@
+# Creating a Virtual env.
+create-env:
+    python3 -m venv env
+
+# Save required packages
+save-packages:
+    pip freeze > requirements.txt
+
+# Install required packages
+install-packages:
+    pip install -r requirements.txt
+
 # List available migrations
 list-migrations:
     python3 -m src.bigquery_migrations.migration_cli list

@@ -1,7 +1,6 @@
 # python-bigquery-migrations
 
 ## Dependecies
-- python-dotenv
 - google-auth
 - google-cloud-bigquery
 - colorama
