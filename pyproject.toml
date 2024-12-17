@@ -1,12 +1,11 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "bigquery-migrations"
-dynamic = ["version"]
+dynamic = ["version", "readme"]
 description = "Simple tool for writing Google BigQuery migrations"
-readme = "README.md"
 requires-python = ">=3.9"
 keywords = ["migrations", "bigquery"]
 license = {file = "LICENSE"}
@@ -14,14 +13,13 @@ authors = [
     {name = "Roland Bende", email = "benderoland@gmail.com"}
 ]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3 :: Only",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Utilities"
 ]
@@ -46,11 +44,12 @@ dev = [
     "coverage>=7.0.0,<8.0.0"
 ]
 
-[tool.setuptools]
-packages.find = {where = ["src"]}
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.setuptools.dynamic]
 version = {attr = "bigquery_migrations.__version__"}
+readme = {file = ["README.md", "CHANGELOG.md"]}
 
 [tool.autopep8]
 max_line_length = 79
