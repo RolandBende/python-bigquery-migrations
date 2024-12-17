@@ -49,7 +49,7 @@ where = ["src"]
 
 [tool.setuptools.dynamic]
 version = {attr = "bigquery_migrations.__version__"}
-readme = {file = ["README.md", "CHANGELOG.md"]}
+readme = {file = ["README.md", "CHANGELOG.md"], content-type = "text/markdown"}
 
 [tool.autopep8]
 max_line_length = 79
