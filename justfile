@@ -10,6 +10,14 @@ save-packages:
 install-packages:
     pip install -r requirements.txt
 
+# Build package
+build:
+    python3 -m build
+
+# Validate build
+build-validate:
+    twine check dist/*
+
 # List available migrations
 list-migrations:
     python3 -m src.bigquery_migrations.migration_cli list
