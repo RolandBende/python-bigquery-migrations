@@ -59,7 +59,7 @@ def main():
     )
     parser.add_argument(
         '--gcp-project-id', 
-        help="Specify the GCP Project ID (optional)"
+        help="Specify the Google Cloud Project ID (optional)"
     )
     
     args = parser.parse_args()
