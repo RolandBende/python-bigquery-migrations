@@ -67,7 +67,6 @@ class CreateUsersTable(Migration):
         ]
         table = bigquery.Table(table_id, schema=schema)
         table = self.client.create_table(table)
-        class_name = self.__class__.__name__
         print(
             "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
         )
@@ -79,7 +78,6 @@ class CreateUsersTable(Migration):
         # If the table does not exist, delete_table raises
         # google.api_core.exceptions.NotFound unless not_found_ok is True.
         self.client.delete_table(table_id, not_found_ok=True)
-        class_name = self.__class__.__name__
         print("Deleted table '{}'.".format(table_id))
 ```
 

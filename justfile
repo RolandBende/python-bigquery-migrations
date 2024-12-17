@@ -22,6 +22,10 @@ build-validate:
 upload-test:
     twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
+# Upload to PyPi
+upload-prod:
+    twine upload dist/*
+
 # List available migrations
 list-migrations:
     python3 -m src.bigquery_migrations.migration_cli list
