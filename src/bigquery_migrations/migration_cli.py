@@ -10,6 +10,7 @@ def resolve_path(env_var):
         raise ValueError(f"The environment variable {env_var} is not set and no default is provided.")
     return Path(env_var).resolve()
 
+
 def create_migrator(sa_dir: str, sa_fname: str, gcp_id: str, migrations_dir: str) -> MigrationManager:
     service = MigrationService(
         resolve_path(sa_dir),
@@ -18,6 +19,7 @@ def create_migrator(sa_dir: str, sa_fname: str, gcp_id: str, migrations_dir: str
         resolve_path(migrations_dir)
     )
     return service.create()
+
 
 def run_migrations(migrator):
     try:
@@ -58,20 +60,19 @@ def main():
         help="Name of the migrations directory (optional)"
     )
     parser.add_argument(
-        '--gcp-project-id', 
+        '--gcp-project-id',
         help="Specify the Google Cloud Project ID (optional)"
     )
-    
+
     args = parser.parse_args()
-    
+
     gcp_sa_json_dir = args.migrations_dir or os.getenv('GCP_SA_JSON_DIR', 'credentials')
     gcp_sa_json_fname = args.migrations_dir or os.getenv('GCP_SA_JSON_FILENAME', 'gcp-sa.json')
     migrations_dir = args.migrations_dir or os.getenv('MIGRATIONS_DIR', 'migrations')
     gcp_project_id = args.gcp_project_id or os.getenv('GCP_PROJECT_ID')
-    
+
     migrator = create_migrator(gcp_sa_json_dir, gcp_sa_json_fname, gcp_project_id, migrations_dir)
 
-    
     if args.command == 'list':
         list_migrations(migrator)
     elif args.command == 'run':
