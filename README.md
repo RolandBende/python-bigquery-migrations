@@ -4,6 +4,11 @@ Python bigquery-migrations package is for creating and manipulating BigQuery dat
 
 Migrations are like version control for your database, allowing you to define and share the application's datasets and table schema definitions.
 
+## Prerequisite
+
+- Google Cloud Project with enabled billing
+- Enabled Google Cloud BigQuery API
+
 ## Getting Started
 
 ## Install
