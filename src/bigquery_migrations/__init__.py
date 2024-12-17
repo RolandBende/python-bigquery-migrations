@@ -7,4 +7,7 @@ This module
 """
 from .migration import Migration
 
+__all__ = [
+    "Migration"
+]
 __version__ = "0.4.3"
