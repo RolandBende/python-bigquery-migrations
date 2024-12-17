@@ -10,7 +10,7 @@ requires-python = ">=3.9"
 keywords = ["migrations", "bigquery"]
 license = {file = "LICENSE"}
 authors = [
-    {name = "Roland Bende", email = "benderoland@gmail.com"}
+    {name = "Roland Bende", email = "benderoland+bigquery-migrations@gmail.com"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",

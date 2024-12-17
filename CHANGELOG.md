@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.3
+
+### Documentation
+
+- README.md
+    - GCP Service account creation process updated
+
 ## 0.4.2
 
 ### Documentation
