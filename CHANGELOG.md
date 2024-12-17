@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.2
+
+### Documentation
+
+- README.md
+    - sample code: import correction
+    - new sections:
+        - GCP Service account creation process
+        - Migration naming convention
+
 ## 0.4.1
 
 ### Documentation

@@ -18,6 +18,10 @@ build:
 build-validate:
     twine check dist/*
 
+# Delete build
+build-delete:
+    rm -rf __pycache__ dist build src/*.egg-info
+
 # Upload to TestPyPi
 upload-test:
     twine upload --repository-url https://test.pypi.org/legacy/ dist/*
