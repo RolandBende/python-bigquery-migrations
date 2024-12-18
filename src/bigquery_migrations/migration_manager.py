@@ -91,7 +91,7 @@ class MigrationManager:
         Returns:
             Tuple(str, Optional[str]): Migrated migration name, Previous migration name
         """
-        print(f"Rolling back migration: {migration_name}")
+        print(Fore.YELLOW + f"Rolling back migration: {migration_name}")
         migrations = self.list_migrations()
         prev_index = migrations.index(migration_name) - 1
         prev_migration = migrations[prev_index] if prev_index >= 0 else None
@@ -120,10 +120,10 @@ class MigrationManager:
         last_migration, last_timestamp = self.get_last_migration()
 
         if not last_migration:
-            print(Fore.YELLOW + "No migrations have been applied yet.")
+            print(Fore.CYAN + "No migrations have been applied yet.")
             return reversed_migrations
 
-        print(Fore.YELLOW + "Rolling back migrations in reverse order...")
+        print(Fore.CYAN + "Rolling back migrations in reverse order...")
 
         # If last migration exists, start from it
         if last_migration:
