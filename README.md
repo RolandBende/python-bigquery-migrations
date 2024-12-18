@@ -122,9 +122,7 @@ your-project
 
 #### Creating a Service Account for Google BigQuery
 
-You can connect to BigQuery with a user account or a service account. A service account is a special kind of account designed to be used by applications or compute workloads, rather than a person.
-
-Service accounts don’t have passwords and use a unique email address for identification. You can associate each service account with a service account key, which is a public or private RSA key pair. In this walkthrough, we use a service account key in AWS SCT to access your BigQuery project.
+You can connect to BigQuery with a user account or a service account. A service account is a special kind of account designed to be used by applications or compute workloads, rather than a person. Service accounts don’t have passwords and use a unique email address for identification.
 
 To create a BigQuery service account key
 
