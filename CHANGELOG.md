@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1
+
+### Documentation
+
+- README.md
+    - Modified sections
+        - Create the neccessary files in the folders
+
 ## 0.5.0
 
 ### Feature
