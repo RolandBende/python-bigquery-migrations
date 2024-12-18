@@ -55,13 +55,43 @@ To run all of your outstanding migrations, execute the `run` command:
 bigquery-migrations run
 ```
 
-You can specify the Google Cloud Project id witth the `--gcp-project-id` argument:
+You can specify the Google Cloud Project id with the `--gcp-project-id` argument:
 
 ```bash
-bigquery-migrations run --gcp-project-id
+bigquery-migrations run --gcp-project-id your-gcp-id
 ```
 
+### Migration log
+
+> **IMPORTANT!**  
+> It's cruical to keep the migration_log.json file in place, and not to modify it manualy!
+
+After the first successful run a migration_log.json is created in the migrations directory.
+
+```
+your-project
+├── migrations
+│   ├── 2024_12_01_120000_create_users_table.py
+    ├── migration_log.json
+...
+```
+
+The migration_log.json file content should look like this:
+```json
+{
+    "last_migration": "2024_12_10_121000_create_users_table",
+    "timestamp": "2024-12-18T12:25:54.318426+00:00"
+}
+```
+
+
 ## Rolling Back Migrations
+
+To reverse a specific migration, execute the `rollback` command and pass the migration name with the `--migration-name` argument:
+
+```bash
+bigquery-migrations rollback --migration-name 2024_12_10_121000_create_users_table
+```
 
 To reverse all of your migrations, execute the `reset` command:
 
