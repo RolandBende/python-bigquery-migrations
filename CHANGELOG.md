@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.0
+
+### Feature
+
+- Rollback to a specific migration
+
+### Documentation
+
+- README.md
+    - New sections
+        - Migration log
+    - Modified sections
+        - Running migrations
+        - Rollback migrations
+
 ## 0.4.3
 
 ### Documentation
@@ -12,8 +27,8 @@
 ### Documentation
 
 - README.md
-    - sample code: import correction
-    - new sections:
+    - Sample code: import correction
+    - New sections:
         - GCP Service account creation process
         - Migration naming convention
 
