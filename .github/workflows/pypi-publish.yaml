@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/autopep8
+      url: https://pypi.org/p/bigquery-migrations
     permissions:
       id-token: write
     steps:

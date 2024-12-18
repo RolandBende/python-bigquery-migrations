@@ -8,6 +8,7 @@ Migrations are like version control for your database, allowing you to define an
 
 - Google Cloud Project with enabled billing
 - Enabled Google Cloud BigQuery API
+- Google Cloud Service Account
 
 ## Getting Started
 
