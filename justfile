@@ -15,7 +15,7 @@ build:
     python3 -m build
 
 # Validate build
-build-validate:
+build-check:
     twine check dist/*
 
 # Delete build
@@ -31,8 +31,20 @@ upload-prod:
     twine upload dist/*
 
 # List available migrations
-list-migrations:
+migrations-list:
     python3 -m src.bigquery_migrations.migration_cli list
+
+# Run migrations
+migrations-run:
+    python3 -m src.bigquery_migrations.migration_cli run
+
+# Rollback migrations
+migrations-rollback:
+    python3 -m src.bigquery_migrations.migration_cli rollback --migration-name 2024_12_10_121000_create_users_table
+
+# Rollback all migrations
+migrations-reset:
+    python3 -m src.bigquery_migrations.migration_cli reset
 
 # Unit testing: all
 test-unit-all:
