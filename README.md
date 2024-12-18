@@ -8,7 +8,7 @@ Migrations are like version control for your database, allowing you to define an
 
 - Google Cloud Project with enabled billing
 - Enabled Google Cloud BigQuery API
-- Google Cloud Service Account
+- Google Cloud Service Account JSON file
 
 ## Getting Started
 
@@ -44,6 +44,15 @@ your-project
 │   ├── 2024_12_01_120000_create_users_table.py
 └── ...
 ```
+
+You can use different folder names but in that case you must specify them with command arguments:
+
+|argument             |description                                                |
+|---------------------|-----------------------------------------------------------|              
+|--gcp-sa-json-dir    |Name of the service account JSON file directory (optional) |
+|--gcp-sa-json-fname  |Name of the service account JSON file (optional)           |
+|--migrations-dir     |Name of the migrations directory (optional)                |
+
 
 ## Running migrations
 
