@@ -1,23 +1,29 @@
 # python-bigquery-migrations
 
-Python bigquery-migrations package is for creating and manipulating BigQuery databases easily.
+The `python-bigquery-migrations` package provides a streamlined way to create and manage BigQuery databases using intuitive CLI commands, such as the following:
+
+```bash
+bigquery-migrations run
+```
+
+**What are the benefits of using migrations?**
 
 Migrations are like version control for your database, allowing you to define and share the application's datasets and table schema definitions.
 
-## Prerequisite
+## Getting Started
+
+## 0. Prerequisite
 
 - Google Cloud Project with enabled billing
 - Enabled Google Cloud BigQuery API
 - Google Cloud Service Account JSON file
 
-## Getting Started
-
-## Install
+## 1. Install
 ```
 pip install bigquery-migrations
 ```
 
-## Create the project folder structure
+## 2. Create the project folder structure
 
 Create two subdirectory:
 1. credentials
@@ -30,9 +36,44 @@ your-project-root-folder
 └── ...
 ```
 
-## Create the neccessary files in the folders
+## 3. Create the neccessary files in the folders
+
+### Google Cloud Service Account JSON file
 
 Put your Google Cloud Service Account JSON file in the credentials subdirectory. See more info in the [Authorize BigQuery Client section](#authorize-bigquery-client)
+
+```
+your-project
+├── credentials
+│   ├── gcp-sa.json
+├── migrations
+└── ...
+```
+
+You can use different folder name and file name but in that case you must specify them with command arguments, such as the following:
+
+```bash
+bigquery-migrations run --gcp-sa-json-dir  my-creds --gcp-sa-json-fname my-service-account.json
+```
+
+|argument             |description                                                |
+|---------------------|-----------------------------------------------------------|              
+|--gcp-sa-json-dir    |Name of the service account JSON file directory (optional) |
+|--gcp-sa-json-fname  |Name of the service account JSON file (optional)           |
+
+> **IMPORTANT!**  
+> Never check the Google Cloud Service Account JSON file into version control. This file contains sensitive credentials that could compromise your Google Cloud account if exposed.
+
+To prevent accidental commits, make sure to add the file to your .gitignore configuration. For example:
+
+```bash
+# .gitignore
+gcp-sa.json
+```
+
+By ignoring this file, you reduce the risk of unintentional leaks and maintain secure practices in your repository.
+
+### Migrations
 
 Create your own migrations and put them in the migrations directory. See the [Migration structure section](#migration-structure) and [Migration naming conventions section](#migration-naming-conventions) for more info.
 
@@ -45,12 +86,14 @@ your-project
 └── ...
 ```
 
-You can use different folder names but in that case you must specify them with command arguments:
+You can use different folder name but in that case you must specify it with a command argument:
+
+```bash
+bigquery-migrations run --migrations-dir bq-migrations
+```
 
 |argument             |description                                                |
 |---------------------|-----------------------------------------------------------|              
-|--gcp-sa-json-dir    |Name of the service account JSON file directory (optional) |
-|--gcp-sa-json-fname  |Name of the service account JSON file (optional)           |
 |--migrations-dir     |Name of the migrations directory (optional)                |
 
 
@@ -97,11 +140,23 @@ The migration_log.json file content should look like this:
 
 ## Rolling Back Migrations
 
+### Rollback the last migration
+
+To reverse the last migration, execute the `rollback` command and pass `last` with the `--migration-name` argument:
+
+```bash
+bigquery-migrations rollback --migration-name last
+```
+
+### Rollback a specific migration
+
 To reverse a specific migration, execute the `rollback` command and pass the migration name with the `--migration-name` argument:
 
 ```bash
 bigquery-migrations rollback --migration-name 2024_12_10_121000_create_users_table
 ```
+
+### Rollback all migrations
 
 To reverse all of your migrations, execute the `reset` command:
 
@@ -109,7 +164,7 @@ To reverse all of your migrations, execute the `reset` command:
 bigquery-migrations reset
 ```
 
-### Authorize BigQuery Client
+## Authorize BigQuery Client
 
 Put your service account JSON file in the credentials subdirectory in the root of your project.
 
@@ -120,7 +175,7 @@ your-project
 ...
 ```
 
-#### Creating a Service Account for Google BigQuery
+### Creating a Service Account for Google BigQuery
 
 You can connect to BigQuery with a user account or a service account. A service account is a special kind of account designed to be used by applications or compute workloads, rather than a person. Service accounts don’t have passwords and use a unique email address for identification.
 

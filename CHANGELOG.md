@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.2.
+
+### Feature
+
+- Rollback the last migration
+
+### Documentation
+
+- README.md
+    - Modified sections
+        - Getting Started
+        - Rolling Back Migrations
+
+
 ## 0.5.1
 
 ### Documentation

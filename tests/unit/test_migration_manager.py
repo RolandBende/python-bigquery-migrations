@@ -5,7 +5,6 @@ import io
 from contextlib import redirect_stdout
 from src.bigquery_migrations.migration_manager import MigrationManager
 
-unittest.defaultTestLoader.sortTestMethodsUsing = lambda *args: -1
 
 class MigrationManagerTest(unittest.TestCase):
     
@@ -24,36 +23,48 @@ class MigrationManagerTest(unittest.TestCase):
         migrations_directory_name = "migrations"
         self.migrations_dir_path = os.path.join(parent_dir, migrations_directory_name)
 
-    def test_list_migrations(self):
+    def test_00_list_migrations(self):
         migration_manager = MigrationManager(self.mock_bigquery_client, self.migrations_dir_path)
         expected_value = [
             "2024_01_01_120000_create_dataset_example",
             "2024_01_02_120000_create_table_example",
-            "2024_01_03_120000_create_table_from_json_schema_example"
+            "2024_01_03_120000_create_table_from_json_schema_example",
+            "2024_01_04_120000_create_another_table_example"
         ]
         current_value = migration_manager.list_migrations()
         self.assertEqual(expected_value, current_value)
 
-    def test_run(self):
+    def test_01_run(self):
         migration_manager = MigrationManager(self.mock_bigquery_client, self.migrations_dir_path)
         with redirect_stdout(self.text_trap):
             current_value = migration_manager.run()
         self.assertEqual(type([]), type(current_value))
         last_migration, last_timestamp = migration_manager.get_last_migration()
-        self.assertEqual("2024_01_03_120000_create_table_from_json_schema_example", last_migration)
+        self.assertEqual("2024_01_04_120000_create_another_table_example", last_migration)
 
-    def test_rollback_from_the_last(self):
+    def test_02_rollback_from_the_last(self):
+        migration_manager = MigrationManager(self.mock_bigquery_client, self.migrations_dir_path)
+        migrateFrom = "2024_01_04_120000_create_another_table_example"
+        migrateTo = "2024_01_03_120000_create_table_from_json_schema_example"
+        with redirect_stdout(self.text_trap):
+            return_value = migration_manager.rollback_last()
+        self.assertEqual(type(()), type(return_value))
+        rolledback, actual = return_value
+        self.assertEqual(migrateFrom, rolledback)
+        self.assertEqual(migrateTo, actual)
+    
+    def test_03_rollback_specified(self):
         migration_manager = MigrationManager(self.mock_bigquery_client, self.migrations_dir_path)
         migrateFrom = "2024_01_03_120000_create_table_from_json_schema_example"
         migrateTo = "2024_01_02_120000_create_table_example"
         with redirect_stdout(self.text_trap):
-            current_value = migration_manager.rollback(migrateFrom)
-        self.assertEqual(type(()), type(current_value))
-        rolledback, actual = current_value
+            return_value = migration_manager.rollback(migrateFrom)
+        self.assertEqual(type(()), type(return_value))
+        rolledback, actual = return_value
         self.assertEqual(migrateFrom, rolledback)
         self.assertEqual(migrateTo, actual)
     
-    def test_rollback_no_more_left(self):
+    def test_04_rollback_no_more_left(self):
         migration_manager = MigrationManager(self.mock_bigquery_client, self.migrations_dir_path)
         migrateFrom = "2024_01_01_120000_create_dataset_example"
         migrateTo = None
@@ -64,7 +75,7 @@ class MigrationManagerTest(unittest.TestCase):
         self.assertEqual(migrateFrom, rolledback)
         self.assertEqual(migrateTo, actual)
     
-    def test_reset(self):
+    def test_05_reset(self):
         migration_manager = MigrationManager(self.mock_bigquery_client, self.migrations_dir_path)
         with redirect_stdout(self.text_trap):
             current_value = migration_manager.reset()
@@ -73,5 +84,4 @@ class MigrationManagerTest(unittest.TestCase):
         self.assertEqual(None, last_migration)
 
 if __name__ == "__main__":
-    unittest.defaultTestLoader.sortTestMethodsUsing = lambda *args: -1
     unittest.main()

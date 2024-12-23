@@ -105,6 +105,15 @@ class MigrationManager:
             migration_name = None
         finally:
             return migration_name, prev_migration
+    
+    def rollback_last(self):
+        """Rollback the last applied migration"""
+        last_migration, last_timestamp = self.get_last_migration()
+        if not last_migration:
+            print(Fore.CYAN + "No migrations have been applied yet.")
+            return
+        return self.rollback(last_migration)
+
 
     def reset(self) -> list[Optional[str]]:
         """

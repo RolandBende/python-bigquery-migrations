@@ -23,7 +23,8 @@ class MigrationDirHandlerTest(unittest.TestCase):
         expected_value = [
             "2024_01_01_120000_create_dataset_example",
             "2024_01_02_120000_create_table_example",
-            "2024_01_03_120000_create_table_from_json_schema_example"
+            "2024_01_03_120000_create_table_from_json_schema_example",
+            "2024_01_04_120000_create_another_table_example"
         ]
         current_value = under_test.filename_list()
         self.assertEqual(expected_value, current_value)

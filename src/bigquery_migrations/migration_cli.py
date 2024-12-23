@@ -32,6 +32,13 @@ def run_migrations(migrator: MigrationManager):
     except Exception as e:
         print(f"Error during migration: {e}")
 
+def rollback_last_migration(migrator: MigrationManager):
+    try:
+        migrator.rollback_last()
+        print("Rollback process completed successfully.")
+    except Exception as e:
+        print(f"Error during rollback: {e}")
+    return
 
 def rollback_migration(migrator: MigrationManager, migration_name: str):
     try:
@@ -53,27 +60,38 @@ def reset_migrations(migrator: MigrationManager):
 def main():
     parser = argparse.ArgumentParser(description="Perform BigQuery migrations")
     parser.add_argument(
-        'command', choices=['list', 'run', 'rollback', 'reset'],
+        'command',
+        choices=['list', 'run', 'rollback', 'reset'],
+        type=str,
         help="Choose the operation to perform: list, run, rollback, reset"
     )
     parser.add_argument(
         '--gcp-sa-json-dir',
+        type=str,
+        required=False,
         help="Name of the service account JSON file directory (optional)"
     )
     parser.add_argument(
         '--gcp-sa-json-fname',
+        type=str,
+        required=False,
         help="Name of the service account JSON file (optional)"
     )
     parser.add_argument(
         '--migrations-dir',
+        type=str,
+        required=False,
         help="Name of the migrations directory (optional)"
     )
     parser.add_argument(
         '--gcp-project-id',
+        type=str,
+        required=False,
         help="Specify the Google Cloud Project ID (optional)"
     )
     parser.add_argument(
         '--migration-name',
+        type=str,
         help="Specify the name of the migration to rollback eg. 2024_01_02_120000_create_users_example (required for rollback command)"
     )
 
@@ -93,7 +111,10 @@ def main():
     elif args.command == 'rollback':
         if not args.migration_name:
             parser.error("The --migration-name argument is required for the rollback command.")
-        rollback_migration(migrator, args.migration_name)
+        if args.migration_name == 'last':
+            rollback_last_migration(migrator)
+        else:
+            rollback_migration(migrator, args.migration_name)
     elif args.command == 'reset':
         reset_migrations(migrator)
 

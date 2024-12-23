@@ -38,8 +38,12 @@ migrations-list:
 migrations-run:
     python3 -m src.bigquery_migrations.migration_cli run
 
+# Rollback migration
+migrations-rollback-last:
+    python3 -m src.bigquery_migrations.migration_cli rollback --migration-name last
+
 # Rollback migrations
-migrations-rollback:
+migrations-rollback-specified:
     python3 -m src.bigquery_migrations.migration_cli rollback --migration-name 2024_12_10_121000_create_users_table
 
 # Rollback all migrations
