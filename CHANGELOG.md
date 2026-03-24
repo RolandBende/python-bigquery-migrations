@@ -17,6 +17,10 @@
 
 - `migration_cli.py`: `--gcp-sa-json-dir` and `--gcp-sa-json-fname` CLI arguments were silently ignored due to both reading from `args.migrations_dir` instead of their own argument attributes
 
+### Removed
+
+- Dropped Python 3.9 support (EOL since October 2025). The updated security dependency chain (`cryptography>=46`, `cffi>=2.0`, `pycparser==3.0`) requires Python >=3.10. Minimum supported version is now Python 3.10
+
 ## 0.5.2.
 
 ### Feature
