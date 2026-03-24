@@ -193,3 +193,6 @@ pyrightconfig.json
 # Credentials
 credentials/
 /migrations/
+
+### Python version
+.python-version

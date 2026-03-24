@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.3
+
+### Security
+
+- Upgraded `protobuf` from `5.29.1` to `6.33.6` to fix two high-severity CVEs:
+    - JSON recursion depth bypass (`protobuf < 5.29.6`)
+    - Denial of Service via recursive groups in pure-Python backend (`protobuf < 5.29.5`)
+- Upgraded `google-cloud-bigquery` from `3.27.0` to `3.40.1`
+- Upgraded `google-auth` from `2.37.0` to `2.49.1`
+- Upgraded `google-api-core` from `2.24.0` to `2.30.0`
+- Upgraded `grpcio` / `grpcio-status` from `1.68.1` to `1.78.0`
+- Added explicit `protobuf>=5.29.6` lower-bound in `pyproject.toml` to protect downstream consumers
+
+### Fix
+
+- `migration_cli.py`: `--gcp-sa-json-dir` and `--gcp-sa-json-fname` CLI arguments were silently ignored due to both reading from `args.migrations_dir` instead of their own argument attributes
+
 ## 0.5.2.
 
 ### Feature

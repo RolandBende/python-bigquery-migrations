@@ -97,8 +97,8 @@ def main():
 
     args = parser.parse_args()
 
-    gcp_sa_json_dir = args.migrations_dir or os.getenv('GCP_SA_JSON_DIR', 'credentials')
-    gcp_sa_json_fname = args.migrations_dir or os.getenv('GCP_SA_JSON_FILENAME', 'gcp-sa.json')
+    gcp_sa_json_dir = args.gcp_sa_json_dir or os.getenv('GCP_SA_JSON_DIR', 'credentials')
+    gcp_sa_json_fname = args.gcp_sa_json_fname or os.getenv('GCP_SA_JSON_FILENAME', 'gcp-sa.json')
     migrations_dir = args.migrations_dir or os.getenv('MIGRATIONS_DIR', 'migrations')
     gcp_project_id = args.gcp_project_id or os.getenv('GCP_PROJECT_ID')
 

@@ -27,7 +27,8 @@ classifiers = [
 dependencies = [
     "google-auth",
     "google-cloud-bigquery",
-    "colorama"
+    "colorama",
+    "protobuf>=5.29.6"
 ]
 
 [project.urls]
