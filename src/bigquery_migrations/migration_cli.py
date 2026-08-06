@@ -32,6 +32,7 @@ def run_migrations(migrator: MigrationManager):
     except Exception as e:
         print(f"Error during migration: {e}")
 
+
 def rollback_last_migration(migrator: MigrationManager):
     try:
         migrator.rollback_last()
@@ -39,6 +40,7 @@ def rollback_last_migration(migrator: MigrationManager):
     except Exception as e:
         print(f"Error during rollback: {e}")
     return
+
 
 def rollback_migration(migrator: MigrationManager, migration_name: str):
     try:

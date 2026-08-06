@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.4
+
+### Security
+
+- Upgraded `cryptography` from `46.0.5` to `50.0.0` to fix three CVEs:
+    - PKCS#7 `EnvelopedData` decryption exposes a Bleichenbacher oracle through distinguishable errors and timing (`CVE-2026-69247`, fixed in `50.0.0`)
+    - Buffer overflow when non-contiguous buffers are passed to APIs accepting Python buffer protocol objects (`CVE-2026-39892`, fixed in `46.0.7`)
+    - Name constraints not applied to peer names when the leaf certificate contains a wildcard DNS SAN (`CVE-2026-34073`, fixed in `46.0.6`)
+- Added explicit `cryptography>=50.0.0` lower-bound in `pyproject.toml` to protect downstream consumers
+
+### Fix
+
+- Fixed PEP 8 style violations in `migration_cli.py` (E302: missing blank lines before top-level functions) and `migration_manager.py` (W293: whitespace on blank line, E303: too many blank lines inside class)
+
 ## 0.5.3
 
 ### Security
